@@ -1,4 +1,4 @@
-import { ListResultsComponent } from './component/list-results/list-results.component';
+import { ListResultsComponent } from './components/list-results/list-results.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 

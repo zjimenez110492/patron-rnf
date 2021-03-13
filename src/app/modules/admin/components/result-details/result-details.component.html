@@ -1,0 +1,27 @@
+<!-- HAY QUE VOLVERLA MODAL -->
+<div mat-dialog-title class="h1"  style="background-color:#5bc0de;text-align-last: center; color: white; height: 1.5cm;">
+  <h1 style="padding-top: 0.3cm; "> VER RESULTADO</h1>
+</div>
+<div mat-dialog-content class="mat-typography">
+
+
+      <p class="text-muted text-center">En este formulario podrá Consultar los detalles del Resultado</p>
+
+      <!-- <mat-accordion>
+          <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                  <mat-panel-title>
+                      Actividades
+                  </mat-panel-title>
+                  <mat-panel-description>
+                      {{panelOpenState ? 'Ocultar ' : 'Ver '}} actividades asignadas a este seguimiento
+                  </mat-panel-description>
+              </mat-expansion-panel-header>
+              <app-listar-actividades [seguimiento]="seguimiento"></app-listar-actividades>
+          </mat-expansion-panel>
+      </mat-accordion> -->
+
+</div>
+<div mat-dialog-actions  style="text-align:right">
+  <button style="position: relative; left: 90%;"  class="button is-info" [mat-dialog-close]="true">OK</button>
+</div>
