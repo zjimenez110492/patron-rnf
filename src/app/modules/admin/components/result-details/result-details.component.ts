@@ -22,6 +22,7 @@ export class ResultDetailsComponent implements OnInit {
     this.colProceso=this.columnsProceso();
     this.colCaracteristica=0;
     this.colActividad=0;
+
   }
   columnsProceso():number{
     let maxColumns=0;

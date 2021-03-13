@@ -18,7 +18,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./list-results.component.scss'],
 })
 export class ListResultsComponent implements OnInit {
-  displayedColumns: string[] = ['proceso', 'actividad','opciones'];
+  displayedColumns: string[] = ['nombre', 'numProcesos','opciones'];
   dataSource: MatTableDataSource<Result>;
   resultados: Result[];
   constructor(private resultService: ResultsService, public dialog: MatDialog) {
@@ -35,12 +35,12 @@ export class ListResultsComponent implements OnInit {
       });
       this.dataSource = new MatTableDataSource(this.resultados);
       });
-
-    /* this.resultService.addResult(this.crearResult()); */
+/*
+    this.resultService.addResult(this.crearResult()); */
   }
   verResult(row:Result){
     const dialogRef = this.dialog.open(ResultDetailsComponent, {
-      width: '800px',
+      width: '1600px',
       height:'600px',
       data:{}
     });
@@ -114,13 +114,14 @@ export class ListResultsComponent implements OnInit {
     actividad.push(a);
     let p: Process = {
       id: 'P2',
-      nombre: 'Leer huella 2',
+      nombre: 'Leer huella 1',
       actividad: actividad,
     };
     let proceso: Process[] = [];
     proceso.push(p);
     let resultados: Result = {
       proceso: proceso,
+      nombre:"Sabana 2"
     };
     return resultados;
   }
