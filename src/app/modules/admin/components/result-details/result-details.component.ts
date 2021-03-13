@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Result } from 'src/app/models/result.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-result-details',
@@ -23,6 +24,17 @@ export class ResultDetailsComponent implements OnInit {
     this.colCaracteristica=0;
     this.colActividad=0;
 
+  }
+  generarNombre(){
+    Swal.fire({
+      title: 'El sistema en el proceso leer huella con la actividad Cargar huella, con respecto a la seguridad en la atenticidad deberá: a traves de la huella dactilar, deberá almacenar la imagen y los archivos distancia en formatos .JPEG y .TXT respectivamente',
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      }
+    })
   }
   columnsProceso():number{
     let maxColumns=0;

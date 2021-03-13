@@ -10,8 +10,9 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from 'src/environments/environment';
 import {MatDialogModule} from '@angular/material/dialog';
 import { ResultDetailsComponent } from './components/result-details/result-details.component';
+import { ViewModelComponent } from './components/view-model/view-model.component';
 @NgModule({
-  declarations: [ListResultsComponent, ResultDetailsComponent],
+  declarations: [ListResultsComponent, ResultDetailsComponent, ViewModelComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,

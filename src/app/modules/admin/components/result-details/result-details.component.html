@@ -9,7 +9,7 @@
     height: 1.5cm;
   "
 >
-  <h1 style="padding-top: 0.3cm">VER RESULTADO</h1>
+  <h1 style="padding-top: 0.3cm">VER MODELO</h1>
 </div>
 
 <div mat-dialog-content style="padding-left: 1cm">
@@ -33,7 +33,7 @@
         <th colspan="5" scope="col">PRIORIDAD</th>
         <th colspan="5" scope="col">OTROS DATOS DEL RNF</th>
       </tr>
-      <tr class="table-primary encabezado">
+      <tr class="table-primary encabezado" style="text-align: center;">
         <td scope="col">Id Proceso</td>
         <td scope="col">Nombre Proceso</td>
         <td scope="col">Actividad</td>
@@ -65,26 +65,11 @@
         <td rowspan="5" style="text-align: center">P1</td>
         <td rowspan="5" style="text-align: center">Leer Huella</td>
         <td rowspan="1" style="text-align: center">Escanear Huella</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td></td><td></td><td></td><td></td>
+        <td></td><td></td><td></td><td></td>
+        <td></td><td></td><td></td><td></td>
+        <td></td><td></td><td></td><td></td>
+        <td></td><td></td><td></td><td></td>
         <td></td>
       </tr>
       <tr>
@@ -92,7 +77,7 @@
         <td rowspan="4" style="text-align: center">S2</td>
         <td rowspan="4" style="text-align: center">Seguridad</td>
         <td rowspan="4" style="text-align: center">X</td>
-        <td rowspan="2" style="text-align: center">Autenticidad</td>
+        <td rowspan="2" style="text-align: center"><a style="cursor: pointer; color: blue;" (click)="generarNombre()">Autenticidad</a></td>
         <td rowspan="2" style="text-align: center">S2-1</td>
         <td rowspan="2" style="text-align: center">Justificacion 1</td>
         <td rowspan="2" style="text-align: center">Huella dactilar</td>

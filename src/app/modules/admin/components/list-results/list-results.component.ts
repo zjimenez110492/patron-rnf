@@ -1,3 +1,4 @@
+import { ViewModelComponent } from './../view-model/view-model.component';
 import { ResultDetailsComponent } from './../result-details/result-details.component';
 import { Result } from '../../../../models/result.model';
 import { Activity } from '../../../../models/activity.model';
@@ -18,7 +19,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./list-results.component.scss'],
 })
 export class ListResultsComponent implements OnInit {
-  displayedColumns: string[] = ['nombre', 'numProcesos','opciones'];
+  displayedColumns: string[] = ['nombre','modelo','numProcesos','opciones'];
   dataSource: MatTableDataSource<Result>;
   resultados: Result[];
   constructor(private resultService: ResultsService, public dialog: MatDialog) {
@@ -35,8 +36,20 @@ export class ListResultsComponent implements OnInit {
       });
       this.dataSource = new MatTableDataSource(this.resultados);
       });
-/*
-    this.resultService.addResult(this.crearResult()); */
+
+   /*  this.resultService.addResult(this.crearResult()); */
+  }
+  verModelo(row:Result){
+    const dialogRef = this.dialog.open(ViewModelComponent, {
+      width: '1600px',
+      height:'600px',
+      data:{}
+    });
+
+   /*  dialogRef.componentInstance.imagen=row.nombre; */
+    dialogRef.afterClosed().subscribe(result => {
+      this.ngOnInit();
+    });
   }
   verResult(row:Result){
     const dialogRef = this.dialog.open(ResultDetailsComponent, {
@@ -121,7 +134,8 @@ export class ListResultsComponent implements OnInit {
     proceso.push(p);
     let resultados: Result = {
       proceso: proceso,
-      nombre:"Sabana 2"
+      nombre:"Sabana 2",
+      imagen:"gs://patron-especificacion-rnf.appspot.com/imagen_2021-03-13_143558.png"
     };
     return resultados;
   }
