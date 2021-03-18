@@ -66,8 +66,8 @@ export class ListResultsComponent implements OnInit {
   }
   crearResult():Result{
     let d: Data[] = [{
-      nombreDato: 'Huella Dactilar',
-      formaAlmacenamiento: 'Archivo txt',
+      nombreDato: 'Imagen Huella',
+      formaAlmacenamiento: 'Archivo JPEG',
     }];
 
     let el: Element[] = [{
@@ -76,19 +76,19 @@ export class ListResultsComponent implements OnInit {
     }];
     let rnf: Rnf[] = [{
 
-      id: 'S2-1',
-      atributoCalidad:'Atributo',
+      id: 'S1-AUTH1',
+      atributoCalidad:'Atributo de Auth',
       valorAtribCalidad:'valor atbC',
-      justificacion: 'Requisito justificado',
+      justificacion: 'Este requisito es escencial porque ...',
       importancia: true,
       urgencia: false,
       intervaloTiempo: 'Pasado-Presente',
-      valorPrioridad: 2,
+      valorPrioridad: 1,
       descripcion: 'Hazlo Inmediatamente',
       tipo: 'Básico',
       dificultad: 'Dificil',
       riesgos: '- Accesos no permitidos',
-      obligatoriedad: 'Deseable',
+      obligatoriedad: 'Obligatorio',
       rol: 'Regla o hecho',
       elemento: el,
 
@@ -110,7 +110,7 @@ export class ListResultsComponent implements OnInit {
       caracteristica: c,
     }];
     let proceso: Process []= [{
-      id: 'P2',
+      id: 'P1',
       nombreProceso: 'Leer huella 1',
       actividad: a,
     }];

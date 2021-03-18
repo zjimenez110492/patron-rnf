@@ -2,10 +2,16 @@ table {
   border-collapse: collapse;
   border-color: black;
   border: rgb(0, 0, 0) 5px solid;
-
+  thead{
+    font-weight: 700;
+  }
+ td {
+    border: 3px solid black;
+  }
 }
 
 .encabezado{
   font-weight: 700;
 
 }
+

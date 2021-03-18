@@ -16,38 +16,62 @@ export class ResultDetailsComponent implements OnInit {
   constructor(public dialogoReg: MatDialogRef<ResultDetailsComponent>) { }
 
   ngOnInit(): void {
-     console.log("Resultado en details:  ", this.result.proceso[0].nombreProceso);
-     this.dataTable();
+    console.log("Resultado en details:  ", this.result.proceso[0].nombreProceso);
+    this.dataTable();
   }
 
 
-  createTable(tableData) {
-    console.log("CREANDO TABLA");
+  createTable(header, tableData) {
+    console.log("HEADER:  ", header);
     var table = document.createElement('table');
+    var tableHead = document.createElement('thead');
     var tableBody = document.createElement('tbody');
+
+
+    header.forEach(
+      function (rowData) {
+        console.log("HEADER ROWDATA:  ",rowData);
+        var row = document.createElement('tr');
+
+        rowData.forEach(
+          function (cellData) {
+            var cell = document.createElement('th');
+
+            cell.appendChild(document.createTextNode(cellData));
+            row.appendChild(cell);
+            row.style.backgroundColor="rgb(153,255,255)"
+          });
+          tableHead.appendChild(row);
+      });
+
+
+
 
     tableData.forEach(
       function (rowData) {
+        console.log("TABLA ROWDATA:  ",rowData);
         var row = document.createElement('tr');
         rowData.forEach(
           function (cellData) {
             var cell = document.createElement('td');
+            cell.style.border="rgb(0, 0, 0) 1px solid";
             cell.appendChild(document.createTextNode(cellData));
             row.appendChild(cell);
           });
 
         tableBody.appendChild(row);
       });
-
+    table.appendChild(tableHead);
     table.appendChild(tableBody);
     document.body.appendChild(table);
+    console.log("TABLA CREADA:   ", table);
   }
 
 
   dataTable() {
     let data = [[]];
-    let row = ["ID Proceso", "Nombre Proceso", "Actividad", "ID Caracteristica", "Caracteristica", "Dependencia", "Sub Caracteristica", "ID RNF", "Atributo", "Valor Atributo", "Justificacion", "Importancia", "Urgencia", "Intervalo Tiempo", "Valor Prioridad", "Descripcion", "Tipo", "Dificultad", "Riesgos", "Obligatoriedad", "Rol", "Elemento", "Dato Almacenar", "Formato Almacenamiento"]
-    data.push(row);
+    let header = ["ID Proceso", "Nombre Proceso", "Actividad", "ID Caracteristica", "Caracteristica", "Dependencia", "Sub Caracteristica", "ID RNF", "Atributo", "Valor Atributo", "Justificacion", "Importancia", "Urgencia", "Intervalo Tiempo", "Valor Prioridad", "Descripcion", "Tipo", "Dificultad", "Riesgos", "Obligatoriedad", "Rol", "Elemento", "Dato Almacenar", "Formato Almacenamiento"]
+
     for (let p of this.result.proceso) {
       for (let a of p.actividad) {
         for (let c of a.caracteristica) {
@@ -55,12 +79,10 @@ export class ResultDetailsComponent implements OnInit {
             for (let rnf of sc.rnf) {
               for (let e of rnf.elemento) {
                 for (let d of e.datos) {
-                  console.log(`Proceso ${p.nombreProceso}- Actividad ${a.nombreActividad} - Caracteristica: ${c.nombreCaracteristica}
-                  - SubCaracteristica: ${sc.nombreSubCaracteristica} - RNF ${rnf.id} - Elemento ${e.nombreElemento} - Dato ${d.nombreDato} Forma Almacenamiento: ${d.formaAlmacenamiento} `)
-                  row = [p.id, p.nombreProceso, a.nombreActividad, c.id, c.nombreCaracteristica, c.dependencia?'X':'', sc.nombreSubCaracteristica,
-                  rnf.id, rnf.atributoCalidad, rnf.valorAtribCalidad, rnf.justificacion, rnf.importancia?'X':'', rnf.urgencia?'X':'', rnf.intervaloTiempo, rnf.valorPrioridad+'', rnf.descripcion,
+                  let row = [p.id, p.nombreProceso, a.nombreActividad, c.id, c.nombreCaracteristica, c.dependencia ? 'X' : '', sc.nombreSubCaracteristica,
+                  rnf.id,`<a style="cursor: pointer;"> ${ rnf.atributoCalidad}</a>`, rnf.valorAtribCalidad, rnf.justificacion, rnf.importancia ? 'X' : '', rnf.urgencia ? 'X' : '', rnf.intervaloTiempo, rnf.valorPrioridad + '', rnf.descripcion,
                   rnf.tipo, rnf.dificultad, rnf.riesgos, rnf.obligatoriedad, rnf.rol, e.nombreElemento, d.nombreDato, d.formaAlmacenamiento]
-                data.push(row)
+                  data.push(row)
                 }
               }
             }
@@ -68,8 +90,8 @@ export class ResultDetailsComponent implements OnInit {
         }
       }
     }
-console.log("DATA OBTENIDA:  ",data)
-this.createTable(data)
+    console.log("DATA OBTENIDA:  ", data)
+    this.createTable([header], data)
   }
   generarNombre() {
     Swal.fire({
