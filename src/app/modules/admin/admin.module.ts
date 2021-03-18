@@ -11,8 +11,9 @@ import { environment } from 'src/environments/environment';
 import {MatDialogModule} from '@angular/material/dialog';
 import { ResultDetailsComponent } from './components/result-details/result-details.component';
 import { ViewModelComponent } from './components/view-model/view-model.component';
+import { ViewRnfComponent } from './components/view-rnf/view-rnf.component';
 @NgModule({
-  declarations: [ListResultsComponent, ResultDetailsComponent, ViewModelComponent],
+  declarations: [ListResultsComponent, ResultDetailsComponent, ViewModelComponent, ViewRnfComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,

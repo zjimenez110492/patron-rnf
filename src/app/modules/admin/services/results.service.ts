@@ -14,7 +14,8 @@ const COLECCION_RESULTADOS: string = '/resultados';
   providedIn: 'root',
 })
 export class ResultsService {
-  private postsCollection: AngularFirestoreCollection<Element>;
+  result:Result;
+  private resultCollection: AngularFirestoreCollection<Result>;
   private resultDB: AngularFireList<Result>;
   public evento: Element;
   constructor(
@@ -40,4 +41,5 @@ export class ResultsService {
       })
     );
   }
+
 }

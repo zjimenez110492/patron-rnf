@@ -2,16 +2,34 @@ table {
   border-collapse: collapse;
   border-color: black;
   border: rgb(0, 0, 0) 5px solid;
-  thead{
+
+  thead {
     font-weight: 700;
   }
- td {
+  td {
     border: 3px solid black;
   }
 }
 
-.encabezado{
+.encabezado {
   font-weight: 700;
-
+}
+div {
+  .pad-2 {
+    padding: 2cm;
+  }
 }
 
+.flex {
+  flex: 1 1 auto;
+}
+
+.scrollable {
+  overflow: auto;
+  box-sizing: border-box;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}

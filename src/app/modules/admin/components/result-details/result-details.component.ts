@@ -1,5 +1,9 @@
+import { ViewRnfComponent } from './../view-rnf/view-rnf.component';
+import { ResultsService } from './../../services/results.service';
+import { DOCUMENT } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Result } from 'src/app/models/result.model';
 import Swal from 'sweetalert2';
 
@@ -13,24 +17,33 @@ export class ResultDetailsComponent implements OnInit {
   colProceso: number;
   colActividad: number;
   colCaracteristica: number;
-  constructor(public dialogoReg: MatDialogRef<ResultDetailsComponent>) { }
+  nombresRNF: string[]=[];
+  constructor(private resultService: ResultsService, private router: Router, private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    console.log("Resultado en details:  ", this.result.proceso[0].nombreProceso);
-    this.dataTable();
-  }
+    this.result = this.resultService.result;
+    if (this.result) {
+      this.dataTable();
+    }
+    else {
+      this.router.navigateByUrl('')
+    }
 
+  }
 
   createTable(header, tableData) {
     console.log("HEADER:  ", header);
+    var div = document.getElementById('table-container');
+    console.log("div:  ", div);
     var table = document.createElement('table');
     var tableHead = document.createElement('thead');
+    tableHead.style.backgroundColor = "red"
     var tableBody = document.createElement('tbody');
 
 
     header.forEach(
       function (rowData) {
-        console.log("HEADER ROWDATA:  ",rowData);
+        console.log("HEADER ROWDATA:  ", rowData);
         var row = document.createElement('tr');
 
         rowData.forEach(
@@ -39,22 +52,19 @@ export class ResultDetailsComponent implements OnInit {
 
             cell.appendChild(document.createTextNode(cellData));
             row.appendChild(cell);
-            row.style.backgroundColor="rgb(153,255,255)"
+            row.style.backgroundColor = "rgb(153,255,255)"
           });
-          tableHead.appendChild(row);
+        tableHead.appendChild(row);
       });
-
-
-
 
     tableData.forEach(
       function (rowData) {
-        console.log("TABLA ROWDATA:  ",rowData);
+        console.log("TABLA ROWDATA:  ", rowData);
         var row = document.createElement('tr');
         rowData.forEach(
           function (cellData) {
             var cell = document.createElement('td');
-            cell.style.border="rgb(0, 0, 0) 1px solid";
+            cell.style.border = "rgb(0, 0, 0) 1px solid";
             cell.appendChild(document.createTextNode(cellData));
             row.appendChild(cell);
           });
@@ -63,11 +73,32 @@ export class ResultDetailsComponent implements OnInit {
       });
     table.appendChild(tableHead);
     table.appendChild(tableBody);
-    document.body.appendChild(table);
-    console.log("TABLA CREADA:   ", table);
+    tableHead.style.paddingTop = "10cm"
+    tableBody.style.padding = "2cm"
+    table.style.padding = "2cm"
+    div.appendChild(table);
   }
 
+  volver() {
+    this.result = null;
+    this.resultService.result = null;
+    this.ngOnInit()
+    this.router.navigateByUrl('')
+  }
+  generarNombres(){
 
+    const dialogRef = this.dialog.open(ViewRnfComponent, {
+      width: '800px',
+      height:'600px',
+      data:{}
+    });
+
+    dialogRef.componentInstance.nombresRNF=this.nombresRNF;
+    dialogRef.afterClosed().subscribe(result => {
+     /*  this.ngOnInit(); */
+    });
+
+  }
   dataTable() {
     let data = [[]];
     let header = ["ID Proceso", "Nombre Proceso", "Actividad", "ID Caracteristica", "Caracteristica", "Dependencia", "Sub Caracteristica", "ID RNF", "Atributo", "Valor Atributo", "Justificacion", "Importancia", "Urgencia", "Intervalo Tiempo", "Valor Prioridad", "Descripcion", "Tipo", "Dificultad", "Riesgos", "Obligatoriedad", "Rol", "Elemento", "Dato Almacenar", "Formato Almacenamiento"]
@@ -80,9 +111,12 @@ export class ResultDetailsComponent implements OnInit {
               for (let e of rnf.elemento) {
                 for (let d of e.datos) {
                   let row = [p.id, p.nombreProceso, a.nombreActividad, c.id, c.nombreCaracteristica, c.dependencia ? 'X' : '', sc.nombreSubCaracteristica,
-                  rnf.id,`<a style="cursor: pointer;"> ${ rnf.atributoCalidad}</a>`, rnf.valorAtribCalidad, rnf.justificacion, rnf.importancia ? 'X' : '', rnf.urgencia ? 'X' : '', rnf.intervaloTiempo, rnf.valorPrioridad + '', rnf.descripcion,
+                  rnf.id,/* `<a style="cursor: pointer;"> ${  */rnf.atributoCalidad/* }</a>` */, rnf.valorAtribCalidad, rnf.justificacion, rnf.importancia ? 'X' : '', rnf.urgencia ? 'X' : '', rnf.intervaloTiempo, rnf.valorPrioridad + '', rnf.descripcion,
                   rnf.tipo, rnf.dificultad, rnf.riesgos, rnf.obligatoriedad, rnf.rol, e.nombreElemento, d.nombreDato, d.formaAlmacenamiento]
-                  data.push(row)
+                  data.push(row);
+                  let nombreRNF:string = `El sistema en el proceso ${p.nombreProceso} con la actividad ${a.nombreActividad}, con respecto a ${c.nombreCaracteristica} en ${sc.nombreSubCaracteristica}
+                  , deberá: a través de el/la ${e.nombreElemento}  deberá almacenar el/la ${d.nombreDato} en formato ${d.formaAlmacenamiento}`;
+                  this.nombresRNF.push(nombreRNF)
                 }
               }
             }
@@ -90,7 +124,7 @@ export class ResultDetailsComponent implements OnInit {
         }
       }
     }
-    console.log("DATA OBTENIDA:  ", data)
+    console.log("Nombres Formados:  ", this.nombresRNF)
     this.createTable([header], data)
   }
   generarNombre() {

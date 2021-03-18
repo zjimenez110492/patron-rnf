@@ -1,3 +1,4 @@
+import { Route, Router, Routes } from '@angular/router';
 import { ViewModelComponent } from './../view-model/view-model.component';
 import { ResultDetailsComponent } from './../result-details/result-details.component';
 import { Result } from '../../../../models/result.model';
@@ -12,6 +13,7 @@ import { Characteristic } from 'src/app/models/characteristic.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { SubCharacteristic } from 'src/app/models/subcharacteristic.model';
+import { Responsable } from 'src/app/models/responsable.model';
 
 
 @Component({
@@ -20,51 +22,45 @@ import { SubCharacteristic } from 'src/app/models/subcharacteristic.model';
   styleUrls: ['./list-results.component.scss'],
 })
 export class ListResultsComponent implements OnInit {
-  displayedColumns: string[] = ['nombre','modelo','numProcesos','opciones'];
+  displayedColumns: string[] = ['nombre', 'modelo', 'numProcesos', 'opciones'];
   dataSource: MatTableDataSource<Result>;
   resultados: Result[];
-  constructor(private resultService: ResultsService, public dialog: MatDialog) {
+  constructor(private resultService: ResultsService, public dialog: MatDialog, private router: Router) {
     this.resultados = [];
   }
 
   ngOnInit(): void {
+
     this.resultados = [];
     this.resultService.getResults().subscribe((result) => {
-      result.forEach((res:Result)=>{
-        console.log("Result:  ",res);
+      result.forEach((res: Result) => {
+        console.log("Result:  ", res);
         this.resultados.push(res);
-        console.log("Array hasta el momento: ",this.resultados);
+        console.log("Array hasta el momento: ", this.resultados);
       });
       this.dataSource = new MatTableDataSource(this.resultados);
-      });
-/*
-     this.resultService.addResult(this.crearResult()); */
+    });
+    /*
+         this.resultService.addResult(this.crearResult()); */
   }
-  verModelo(row:Result){
+  verModelo(row: Result) {
     const dialogRef = this.dialog.open(ViewModelComponent, {
       width: '1600px',
-      height:'600px',
-      data:{}
+      height: '600px',
+      data: {}
     });
 
-   /*  dialogRef.componentInstance.imagen=row.nombre; */
+    /*  dialogRef.componentInstance.imagen=row.nombre; */
     dialogRef.afterClosed().subscribe(result => {
       this.ngOnInit();
     });
   }
-  verResult(row:Result){
-    const dialogRef = this.dialog.open(ResultDetailsComponent, {
-      width: '1600px',
-      height:'600px',
-      data:{}
-    });
-
-    dialogRef.componentInstance.result=row;
-    dialogRef.afterClosed().subscribe(result => {
-      this.ngOnInit();
-    });
+  verResult(row: Result) {
+    console.log("NAVEGANDO A VIEW");
+    this.resultService.result = row;
+    this.router.navigateByUrl(`/view-Result`);
   }
-  crearResult():Result{
+  crearResult(): Result {
     let d: Data[] = [{
       nombreDato: 'Imagen Huella',
       formaAlmacenamiento: 'Archivo JPEG',
@@ -77,8 +73,8 @@ export class ListResultsComponent implements OnInit {
     let rnf: Rnf[] = [{
 
       id: 'S1-AUTH1',
-      atributoCalidad:'Atributo de Auth',
-      valorAtribCalidad:'valor atbC',
+      atributoCalidad: 'Atributo de Auth',
+      valorAtribCalidad: 'valor atbC',
       justificacion: 'Este requisito es escencial porque ...',
       importancia: true,
       urgencia: false,
@@ -94,31 +90,37 @@ export class ListResultsComponent implements OnInit {
 
     }];
 
-    let subCaracteristica: SubCharacteristic[]=[{
-      nombreSubCaracteristica:'Autenticidad',
-      rnf:rnf
+    let subCaracteristica: SubCharacteristic[] = [{
+      nombreSubCaracteristica: 'Autenticidad',
+      rnf: rnf
     }]
-    let c: Characteristic []= [{
+    let c: Characteristic[] = [{
       nombreCaracteristica: 'Seguridad',
       id: 'S2',
       dependencia: true,
-      subCaracteristica:subCaracteristica
+      subCaracteristica: subCaracteristica
     }];
 
-    let a: Activity []= [{
+    let a: Activity[] = [{
       nombreActividad: 'Cargar Huella',
       caracteristica: c,
     }];
-    let proceso: Process []= [{
+    let proceso: Process[] = [{
       id: 'P1',
       nombreProceso: 'Leer huella 1',
       actividad: a,
     }];
-
+    let responsable: Responsable = {
+      nombreResponsable: "Jhonatan Zuniga",
+      cargo: "Analista",
+      organizacion: "Unicauca"
+    }
     let resultado: Result = {
       proceso: proceso,
-      nombreResult:"Sabana 2",
-      imagen:"gs://patron-especificacion-rnf.appspot.com/imagen_2021-03-13_143558.png"
+      nombreResult: "Sabana 2",
+      imagen: "gs://patron-especificacion-rnf.appspot.com/imagen_2021-03-13_143558.png",
+      responsable
+
     };
     return resultado;
   }

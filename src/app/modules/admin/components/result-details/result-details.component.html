@@ -1,139 +1,25 @@
-<!-- HAY QUE VOLVERLA MODAL -->
-<div
-  mat-dialog-title
-  class="h1"
-  style="
-    background-color: #5bc0de;
-    text-align-last: center;
-    color: white;
-    height: 1.5cm;
-  "
->
-  <h1 style="padding-top: 0.3cm">VER MODELO</h1>
-</div>
-
-<div mat-dialog-content style="padding-left: 1cm">
-  <p class="text-muted text-center">
-    En este formulario podrá Consultar los detalles del Resultado
-  </p>
-
-  <table class="table table-bordered" style="padding-right: 2cm">
-    <thead>
-      <tr class="table-primary">
-        <!--   <th scope="col" colspan="100%" style="text-align: center;">SABANA</th>
-          </tr> -->
-      </tr>
-
-      <tr class="table-primary">
-        <th colspan="2" scope="col">PROCESO</th>
-        <th scope="col">ACTIVIDAD</th>
-        <th colspan="3" scope="col">DATOS DE LA CARACTERISTICA</th>
-        <th colspan="3" scope="col">RNF</th>
-        <th colspan="5" scope="col">DATOS DEL ELEMENTO</th>
-        <th colspan="5" scope="col">PRIORIDAD</th>
-        <th colspan="5" scope="col">OTROS DATOS DEL RNF</th>
-      </tr>
-      <tr class="table-primary encabezado" style="text-align: center;">
-        <td scope="col">Id Proceso</td>
-        <td scope="col">Nombre Proceso</td>
-        <td scope="col">Actividad</td>
-        <td scope="col">ID Caracteristica de Calidad</td>
-        <td scope="col">Caracteristica de calidad</td>
-        <td scope="col">Dependencia</td>
-        <td scope="col">Sub Caracteristica</td>
-        <td scope="col">ID RNF</td>
-        <td scope="col">Justificación</td>
-        <td scope="col">Elemento</td>
-        <td scope="col">Atributo de Calidad (Nivel 3)</td>
-        <td scope="col">Datos a almacenar</td>
-        <td scope="col">Valor del atributo Nivel 3</td>
-        <td scope="col">Forma de almacenamiento</td>
-        <td scope="col">Importancia</td>
-        <td scope="col">Urgencia</td>
-        <td scope="col">Intervalo de Tiempo</td>
-        <td scope="col">Valor de la Prioridad</td>
-        <td scope="col">Descripción</td>
-        <td scope="col">Tipo</td>
-        <td scope="col">Dificultad</td>
-        <td scope="col">Riesgos</td>
-        <td scope="col">Obligatoriedad</td>
-        <td scope="col">Rol</td>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td rowspan="5" style="text-align: center">P1</td>
-        <td rowspan="5" style="text-align: center">Leer Huella</td>
-        <td rowspan="1" style="text-align: center">Escanear Huella</td>
-        <td></td><td></td><td></td><td></td>
-        <td></td><td></td><td></td><td></td>
-        <td></td><td></td><td></td><td></td>
-        <td></td><td></td><td></td><td></td>
-        <td></td><td></td><td></td><td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td rowspan="4" style="text-align: center">Cargar Huella</td>
-        <td rowspan="4" style="text-align: center">S2</td>
-        <td rowspan="4" style="text-align: center">Seguridad</td>
-        <td rowspan="4" style="text-align: center">X</td>
-        <td rowspan="2" style="text-align: center"><a style="cursor: pointer; color: blue;" (click)="generarNombre()">Autenticidad</a></td>
-        <td rowspan="2" style="text-align: center">S2-1</td>
-        <td rowspan="2" style="text-align: center">Justificacion 1</td>
-        <td rowspan="2" style="text-align: center">Huella dactilar</td>
-        <td rowspan="2" style="text-align: center">Atributo 3</td>
-        <td rowspan="1" style="text-align: center">Imagen Huella</td>
-        <td rowspan="1" style="text-align: center"></td>
-        <td rowspan="1" style="text-align: center">Archivo JPEG</td>
-        <td rowspan="2" style="text-align: center">x</td>
-        <td rowspan="2" style="text-align: center">x</td>
-        <td rowspan="2" style="text-align: center">Pasado Presente</td>
-        <td rowspan="2" style="text-align: center">1</td>
-        <td rowspan="2" style="text-align: center">Hazlo Inmediatamente</td>
-        <td rowspan="2" style="text-align: center">Básico</td>
-        <td rowspan="2" style="text-align: center">Dificil</td>
-        <td rowspan="2" style="text-align: center">Accesos no permitidos</td>
-        <td rowspan="2" style="text-align: center">Obligatorio</td>
-        <td rowspan="2" style="text-align: center">Regla o Hecho</td>
-      </tr>
-      <tr>
-        <td rowspan="1" style="text-align: center">Archivo Distancia</td>
-        <td rowspan="1" style="text-align: center"></td>
-        <td rowspan="1" style="text-align: center">Archivo.txt</td>
-      </tr>
-      <tr>
-        <td rowspan="2" style="text-align: center">Responsabilidad</td>
-        <td rowspan="2" style="text-align: center">S2-2</td>
-        <td rowspan="2" style="text-align: center">Justificación 2</td>
-        <td rowspan="2" style="text-align: center">Huella dactilar</td>
-        <td rowspan="2" style="text-align: center">Atributo 3</td>
-        <td rowspan="1" style="text-align: center">Imagen Huella</td>
-        <td rowspan="1" style="text-align: center"></td>
-        <td rowspan="1" style="text-align: center">Archivo JPEG</td>
-        <td rowspan="2" style="text-align: center">X</td>
-        <td rowspan="2" style="text-align: center">X</td>
-        <td rowspan="2" style="text-align: center">Presente Pasado</td>
-        <td rowspan="2" style="text-align: center">1</td>
-        <td rowspan="2" style="text-align: center">Hazlo Inmediatamente</td>
-        <td rowspan="2" style="text-align: center">Basico</td>
-        <td rowspan="2" style="text-align: center">Dificil</td>
-        <td rowspan="2" style="text-align: center">Accesos no permitidos</td>
-        <td rowspan="2" style="text-align: center">Obligatorio</td>
-        <td rowspan="2" style="text-align: center">Regla o hecho</td>
-      </tr>
-     <tr>
-      <td rowspan="1" style="text-align: center">Archivo distancia</td>
-      <td rowspan="1" style="text-align: center">Valor atributo</td>
-      <td rowspan="1" style="text-align: center">Archivo TXT</td>
-     </tr>
-
-
-    </tbody>
-  </table>
-</div>
-
-<!-- </div>
-<div mat-dialog-actions  style="text-align:right">
-  <button style="position: relative; left: 90%;"  class="button is-info" [mat-dialog-close]="true">OK</button>
-</div>
- -->
+<button (click)="volver()" class="btn btn-danger">VOLVER</button>
+<button (click)="generarNombres()" class="btn btn-primary" style="position: relative; left: 75%;">Generar nombres RNF</button> <br /><br />
+<mat-card class="mat-elevation-z8 flex" style="min-height: 10cm">
+  <mat-card-title style="text-align: center">LISTADO RNF </mat-card-title>
+  <mat-card-content>
+    <div
+      id="table-container"
+      style="padding-top: 3cm; padding-left: 2cm"
+      class="scrollable"
+    ></div>
+  </mat-card-content>
+  <mat-card-footer>
+    <div class="" style="padding-left: 2cm">
+      <strong>Responsable</strong>: {{ result.responsable.nombreResponsable }}
+      <br />
+      <strong>Cargo:</strong>: {{ result.responsable.cargo }} <br />
+      <strong>Organización:</strong>: {{ result.responsable.organizacion
+      }}<br /><br />
+    </div>
+    <div
+      class=""
+      style="position: relative; left: 5%; border: 1px; border-color: black"
+    ></div>
+  </mat-card-footer>
+</mat-card>
