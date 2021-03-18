@@ -3,7 +3,7 @@ import { Priority } from "./priority.model";
 import { Rnf } from "./rnf.model";
 
 export interface Activity {
-actividad:string,
+nombreActividad:string,
 caracteristica:Characteristic[],
 
 }

@@ -1,7 +1,8 @@
 import {  Element } from './element.model';
 export interface Rnf {
 id:string,
-subCaracteristica:string,
+atributoCalidad:string,
+valorAtribCalidad:string
 justificacion:string,
 elemento:Element[],
 importancia:boolean,

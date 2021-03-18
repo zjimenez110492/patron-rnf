@@ -1,7 +1,8 @@
 import { Rnf } from './rnf.model';
+import { SubCharacteristic } from './subcharacteristic.model';
 export interface Characteristic {
 id: string,
-Caracteristica:string,
+nombreCaracteristica:string,
 dependencia: boolean,
-rnf:Rnf[]
+subCaracteristica: SubCharacteristic[]
 }

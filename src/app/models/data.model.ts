@@ -1,6 +1,5 @@
 import { Rnf } from './rnf.model';
 export interface Data {
-dato:string,
-valor:string,
+nombreDato:string,
 formaAlmacenamiento:string;
 }

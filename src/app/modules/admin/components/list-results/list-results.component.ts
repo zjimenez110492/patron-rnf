@@ -11,6 +11,7 @@ import { Process } from 'src/app/models/process.model';
 import { Characteristic } from 'src/app/models/characteristic.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
+import { SubCharacteristic } from 'src/app/models/subcharacteristic.model';
 
 
 @Component({
@@ -36,8 +37,8 @@ export class ListResultsComponent implements OnInit {
       });
       this.dataSource = new MatTableDataSource(this.resultados);
       });
-
-   /*  this.resultService.addResult(this.crearResult()); */
+/*
+     this.resultService.addResult(this.crearResult()); */
   }
   verModelo(row:Result){
     const dialogRef = this.dialog.open(ViewModelComponent, {
@@ -64,79 +65,61 @@ export class ListResultsComponent implements OnInit {
     });
   }
   crearResult():Result{
-    let d: Data = {
-      dato: 'Huella Dactilar',
+    let d: Data[] = [{
+      nombreDato: 'Huella Dactilar',
       formaAlmacenamiento: 'Archivo txt',
-      valor: 'x:12,13,005,65',
-    };
-    let dato: Data[] = [];
-    dato.push(d);
-    let el: Element = {
-      atributoCalidad: 'Atributo',
-      datos: dato,
-      elemento: 'Huella dactilar',
-    };
-    let elemento: Element[] = [];
-    elemento.push(el);
-    let rnf: Rnf[] = [{
-      subCaracteristica: 'Autenticidad',
-      id: 'S2-1',
-      justificacion: 'Requisito justificado',
-      descripcion: 'Hazlo Inmediatamente',
-      dificultad: 'Dificil',
-      elemento: elemento,
-      importancia: true,
-      urgencia: false,
-      intervaloTiempo: 'Pasado-Presente',
-      obligatoriedad: 'Deseable',
-      riesgos: '- Accesos no permitidos',
-      rol: 'Regla o hecho',
-      tipo: 'Básico',
-      valorPrioridad: 2,
-
-    },
-    {
-      descripcion: 'Hazlo Inmediatamente',
-      dificultad: 'Dificil',
-      elemento: elemento,
-      id: 'S2-1',
-      importancia: true,
-      urgencia: false,
-      intervaloTiempo: 'Pasado-Presente',
-      justificacion: 'Requisito justificado',
-      obligatoriedad: 'Deseable',
-      riesgos: '- Accesos no permitidos',
-      rol: 'Regla o hecho',
-      tipo: 'Básico',
-      valorPrioridad: 2,
-      subCaracteristica: 'Autenticidad',
     }];
-    let c: Characteristic = {
-      Caracteristica: 'Seguridad',
+
+    let el: Element[] = [{
+      datos: d,
+      nombreElemento: 'Huella dactilar',
+    }];
+    let rnf: Rnf[] = [{
+
+      id: 'S2-1',
+      atributoCalidad:'Atributo',
+      valorAtribCalidad:'valor atbC',
+      justificacion: 'Requisito justificado',
+      importancia: true,
+      urgencia: false,
+      intervaloTiempo: 'Pasado-Presente',
+      valorPrioridad: 2,
+      descripcion: 'Hazlo Inmediatamente',
+      tipo: 'Básico',
+      dificultad: 'Dificil',
+      riesgos: '- Accesos no permitidos',
+      obligatoriedad: 'Deseable',
+      rol: 'Regla o hecho',
+      elemento: el,
+
+    }];
+
+    let subCaracteristica: SubCharacteristic[]=[{
+      nombreSubCaracteristica:'Autenticidad',
+      rnf:rnf
+    }]
+    let c: Characteristic []= [{
+      nombreCaracteristica: 'Seguridad',
       id: 'S2',
       dependencia: true,
-      rnf: rnf,
-    };
-    let caracteristica: Characteristic[] = [];
-    caracteristica.push(c);
-    let a: Activity = {
-      actividad: 'Cargar Huella',
-      caracteristica: caracteristica,
-    };
-    let actividad: Activity[] = [];
-    actividad.push(a);
-    let p: Process = {
+      subCaracteristica:subCaracteristica
+    }];
+
+    let a: Activity []= [{
+      nombreActividad: 'Cargar Huella',
+      caracteristica: c,
+    }];
+    let proceso: Process []= [{
       id: 'P2',
-      nombre: 'Leer huella 1',
-      actividad: actividad,
-    };
-    let proceso: Process[] = [];
-    proceso.push(p);
-    let resultados: Result = {
+      nombreProceso: 'Leer huella 1',
+      actividad: a,
+    }];
+
+    let resultado: Result = {
       proceso: proceso,
-      nombre:"Sabana 2",
+      nombreResult:"Sabana 2",
       imagen:"gs://patron-especificacion-rnf.appspot.com/imagen_2021-03-13_143558.png"
     };
-    return resultados;
+    return resultado;
   }
 }
