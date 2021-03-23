@@ -1,3 +1,4 @@
+import { descripcionRnf } from './../../../../models/descripcionRnf.model';
 import { ViewRnfComponent } from './../view-rnf/view-rnf.component';
 import { ResultsService } from './../../services/results.service';
 import { DOCUMENT } from '@angular/common';
@@ -18,9 +19,11 @@ export class ResultDetailsComponent implements OnInit {
   colActividad: number;
   colCaracteristica: number;
   nombresRNF: string[]=[];
+  descripcionesRNF:descripcionRnf[];
   constructor(private resultService: ResultsService, private router: Router, private dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.descripcionesRNF=[];
     this.result = this.resultService.result;
     if (this.result) {
       this.dataTable();
@@ -93,7 +96,7 @@ export class ResultDetailsComponent implements OnInit {
       data:{}
     });
 
-    dialogRef.componentInstance.nombresRNF=this.nombresRNF;
+    dialogRef.componentInstance.descripcionesRNF=this.descripcionesRNF;
     dialogRef.afterClosed().subscribe(result => {
      /*  this.ngOnInit(); */
     });
@@ -114,9 +117,13 @@ export class ResultDetailsComponent implements OnInit {
                   rnf.id,/* `<a style="cursor: pointer;"> ${  */rnf.atributoCalidad/* }</a>` */, rnf.valorAtribCalidad, rnf.justificacion, rnf.importancia ? 'X' : '', rnf.urgencia ? 'X' : '', rnf.intervaloTiempo, rnf.valorPrioridad + '', rnf.descripcion,
                   rnf.tipo, rnf.dificultad, rnf.riesgos, rnf.obligatoriedad, rnf.rol, e.nombreElemento, d.nombreDato, d.formaAlmacenamiento]
                   data.push(row);
-                  let nombreRNF:string = `El sistema en el proceso ${p.nombreProceso} con la actividad ${a.nombreActividad}, con respecto a ${c.nombreCaracteristica} en ${sc.nombreSubCaracteristica}
-                  , deberá: a través de el/la ${e.nombreElemento}  deberá almacenar el/la ${d.nombreDato} en formato ${d.formaAlmacenamiento}`;
-                  this.nombresRNF.push(nombreRNF)
+                  let desc:descripcionRnf = {
+                    descripcion:  `El sistema en el proceso ${p.nombreProceso} con la actividad ${a.nombreActividad}, con respecto a ${c.nombreCaracteristica} en ${sc.nombreSubCaracteristica}
+                    , deberá: a través de el/la ${e.nombreElemento}  deberá almacenar el/la ${d.nombreDato} en formato ${d.formaAlmacenamiento}`,
+                    idRnf:rnf.id
+                  };
+                 this.descripcionesRNF.push(desc);
+
                 }
               }
             }
@@ -124,7 +131,7 @@ export class ResultDetailsComponent implements OnInit {
         }
       }
     }
-    console.log("Nombres Formados:  ", this.nombresRNF)
+    console.log("Nombres Formados:  ", this.descripcionesRNF)
     this.createTable([header], data)
   }
   generarNombre() {

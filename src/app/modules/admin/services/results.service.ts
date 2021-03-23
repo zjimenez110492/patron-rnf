@@ -27,7 +27,14 @@ export class ResultsService {
       ref.orderByChild('proceso')
     );
   }
+  public tareaCloudStorage(nombreArchivo: string, datos: any) {
+    return this.storage.upload(nombreArchivo, datos);
+  }
 
+  //Referencia del archivo
+  public referenciaCloudStorage(nombreArchivo: string) {
+    return this.storage.ref(nombreArchivo);
+  }
   addResult(result: Result) {
     return this.resultDB.push(result);
   }

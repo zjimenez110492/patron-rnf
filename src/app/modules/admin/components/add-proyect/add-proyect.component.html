@@ -1,0 +1,77 @@
+<button (click)="volver()" class="btn btn-danger">VOLVER</button>
+<p>add-proyect works!</p>
+
+<mat-horizontal-stepper [linear]="isLinear" #stepper>
+  <mat-step [stepControl]="formulario1">
+    <form [formGroup]="formulario1">
+      <ng-template matStepLabel>Nombre del Proyecto</ng-template>
+      <mat-form-field>
+        <mat-label>Nombre del Proyecto*</mat-label>
+        <input
+          matInput
+          placeholder="Last name, First name"
+          formControlName="nombre"
+          required
+        />
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext>Siguiente</button>
+      </div>
+    </form>
+  </mat-step>
+  <!--   ------------------------------------------------------------------------------------------------------------------------------------------ -->
+  <mat-step [stepControl]="formulario2" label="Responsable">
+    <form [formGroup]="formulario2">
+      <mat-form-field>
+        <mat-label>Responsable</mat-label>
+        <input
+          matInput
+          formControlName="responsable"
+          placeholder="Nombre del Responsable de la Especificación"
+          required
+        />
+      </mat-form-field>
+      <br />
+      <mat-form-field>
+        <input
+          matInput
+          formControlName="organizacion"
+          placeholder="Orgnización a la que pertenece"
+          required
+        />
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Atrás</button>
+        <button mat-button matStepperNext>Siguiente</button>
+      </div>
+    </form>
+  </mat-step>
+  <!--   ------------------------------------------------------------------------------------------------------------------------------------------ -->
+  <mat-step>
+    <ng-template matStepLabel>Modelo</ng-template>
+    <p>Indique la imagen del modelado del Proyecto.</p>
+    <div>
+      <input
+        type="file"
+        id="file"
+        (change)="cambioArchivo($event)"
+      />>
+
+      <button [ngClass]="{'button': true, 'is-success': true, 'is-large': true, 'is-loading': porcentaje > 0 && porcentaje < 100}" [disabled]=" (porcentaje > 0 && porcentaje < 100)" (click)="subirArchivo()" [hidden]="!elegido">Subir archivo</button>
+      <div>
+        <button mat-button matStepperPrevious>Atrás</button>
+        <button mat-button matStepperNext [disabled]="!finalizado">Siguiente</button>
+      </div>
+    </div>
+  </mat-step>
+  <!--   ------------------------------------------------------------------------------------------------------------------------------------------ -->
+  <mat-step>
+    <ng-template matStepLabel>Hecho</ng-template>
+    <p>Datos básicos del Proyecto Completados.</p>
+    <div>
+      <button mat-button matStepperPrevious>Atrás</button>
+      <!-- <button mat-button (click)="stepper.reset()">Reset</button> -->
+      <button >Guardar</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

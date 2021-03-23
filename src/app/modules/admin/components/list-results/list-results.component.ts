@@ -60,6 +60,10 @@ export class ListResultsComponent implements OnInit {
     this.resultService.result = row;
     this.router.navigateByUrl(`/view-Result`);
   }
+  addProyect() {
+    console.log("NAVEGANDO A ADD");
+    this.router.navigateByUrl(`/add-proyect`);
+  }
   crearResult(): Result {
     let d: Data[] = [{
       nombreDato: 'Imagen Huella',

@@ -2,5 +2,5 @@
   <h1 style="padding-top: 0.3cm; "> LISTADO DE DESCRIPCIÓN RNF</h1>
 </div>
 <ol>
-  <li *ngFor="let rnf of nombresRNF"> {{rnf}}</li>
+  <li *ngFor="let desc of descripcionesRNF"> <strong>{{desc.idRnf}}</strong> - {{desc.descripcion}}</li>
 </ol>

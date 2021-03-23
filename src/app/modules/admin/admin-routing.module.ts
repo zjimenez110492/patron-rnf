@@ -1,3 +1,4 @@
+import { AddProyectComponent } from './components/add-proyect/add-proyect.component';
 import { ResultDetailsComponent } from './components/result-details/result-details.component';
 import { ListResultsComponent } from './components/list-results/list-results.component';
 import { NgModule } from '@angular/core';
@@ -18,6 +19,14 @@ const routes: Routes = [
   data:
   {
     title: 'View Proyect'
+  }
+},
+{
+  path: 'add-proyect',
+  component: AddProyectComponent,
+  data:
+  {
+    title: 'Add Proyect'
   }
 }
 ];

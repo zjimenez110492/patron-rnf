@@ -1,3 +1,4 @@
+import { descripcionRnf } from './../../../../models/descripcionRnf.model';
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 
@@ -7,12 +8,13 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./view-rnf.component.scss']
 })
 export class ViewRnfComponent implements OnInit {
-  nombresRNF:string[];
+  descripcionesRNF:descripcionRnf[];
   constructor(public dialogRef: MatDialogRef<ViewRnfComponent>) {
-    this.nombresRNF=[];
+    this.descripcionesRNF=[];
   }
 
   ngOnInit(): void {
+
   }
 
 }
